@@ -1,0 +1,31 @@
+type Query {
+  index: String!
+}
+
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+}
+
+type Task {
+  id: Int!
+  day: Int!
+  night: Int
+  currentDay: String!
+}
+
+scalar DateTime
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User
+  tasks: [Task!]!
+  task(id: Int!): Task
+}
+
+type Mutation {
+  createUser(username: String!, email: String!, password: String!): User!
+  createTask(currentDay: DateTime, day: Int, night: Int!, UserId: Int): Task!
+}

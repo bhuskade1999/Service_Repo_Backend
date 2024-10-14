@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserSchema {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserReturnType {
+  message: String!
+  access_token: String
+  user: UserSchema
+}
+
+type TaskSchema {
+  id: ID!
+  currentDay: DateTime!
+  day: Int
+  night: Int
+  user: UserSchema!
+  userId: Int
+}
+
+type TasksReturnType {
+  message: String!
+  tasks: TaskSchema
+}
+
+type Query {
+  index: String!
+  myProfile: UserSchema!
+  getAllTasks(updateTaskArgs: UpdateTaskArgs!): [TaskSchema!]!
+}
+
+input UpdateTaskArgs {
+  startDate: String!
+  endDate: String!
+}
+
+type Mutation {
+  createUser(createUserArgs: CreateUserArgs!): UserReturnType!
+  createTasks(createTaskArgs: CreateTaskArgs!): TasksReturnType!
+  login(email: String!, password: String!): UserReturnType!
+}
+
+input CreateUserArgs {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input CreateTaskArgs {
+  night: Int!
+  currentDay: DateTime!
+  day: Int!
+}
